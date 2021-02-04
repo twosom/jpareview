@@ -8,6 +8,21 @@ public class MemberProductId implements Serializable {
     private String member;  //MemberProduct.member와 연결
     private String product; //MemberProduct,product와 연결
 
+    public String getMember() {
+        return member;
+    }
+
+    public void setMember(String member) {
+        this.member = member;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
     //hashCode and equals
 
 

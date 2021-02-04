@@ -22,22 +22,6 @@ public class MemberPrac {
     private List<MemberProduct> memberProducts;
 
 
-
-    private List<ProductPrac> products = new ArrayList<ProductPrac>();
-
-    public void addProduct(ProductPrac product) {
-        if (!product.getMembers().contains(this)) {
-            product.getMembers().add(this);
-            System.out.println("Added product - member");
-        }
-
-        if (!products.contains(product)) {
-            products.add(product);
-            System.out.println("Added member - product");
-        }
-    }
-
-
     public String getId() {
         return id;
     }
@@ -70,11 +54,5 @@ public class MemberPrac {
         this.locker = locker;
     }
 
-    public List<ProductPrac> getProducts() {
-        return products;
-    }
 
-    public void setProducts(List<ProductPrac> products) {
-        this.products = products;
-    }
 }

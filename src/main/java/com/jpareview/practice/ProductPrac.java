@@ -14,19 +14,6 @@ public class ProductPrac {
     private String name;
 
 
-    @ManyToMany(mappedBy = "products")
-    private List<MemberPrac> members = new ArrayList<>();
-
-
-    public List<MemberPrac> getMembers() {
-
-        return members;
-    }
-
-    public void setMembers(List<MemberPrac> members) {
-        this.members = members;
-    }
-
     public String getId() {
         return id;
     }

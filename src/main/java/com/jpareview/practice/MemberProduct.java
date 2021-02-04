@@ -18,4 +18,28 @@ public class MemberProduct {
     private ProductPrac product;
 
     private int orderAmount;
+
+    public MemberPrac getMember() {
+        return member;
+    }
+
+    public void setMember(MemberPrac member) {
+        this.member = member;
+    }
+
+    public ProductPrac getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductPrac product) {
+        this.product = product;
+    }
+
+    public int getOrderAmount() {
+        return orderAmount;
+    }
+
+    public void setOrderAmount(int orderAmount) {
+        this.orderAmount = orderAmount;
+    }
 }
