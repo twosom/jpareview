@@ -17,13 +17,13 @@ public class MemberPrac {
     private LockerPrac locker;
 
 
-    @ManyToMany
-    @JoinTable(name = "MEMBER_PRODUCT",                     //JoinTable 속성 정리 : @JoinTable.name : 연결 테이블 지정.
-            joinColumns = @JoinColumn(name = "MEMBER_PRAC_ID"),                 //@JoinTable.joinColumns : 현재 방향인 회원과 매핑할 조인 컬럼 정보 지정.
-            inverseJoinColumns = @JoinColumn(name = "PRODUCT_PRAC_ID")            //@JoinTable,inverseJoinColumns : 반대 방향인 상품과 매핑할 조인 컬럼 정보 지정.
-    )
-    private List<ProductPrac> products = new ArrayList<ProductPrac>();
+    //역방향
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts;
 
+
+
+    private List<ProductPrac> products = new ArrayList<ProductPrac>();
 
     public void addProduct(ProductPrac product) {
         if (!product.getMembers().contains(this)) {
@@ -52,6 +52,14 @@ public class MemberPrac {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<MemberProduct> getMemberProducts() {
+        return memberProducts;
+    }
+
+    public void setMemberProducts(List<MemberProduct> memberProducts) {
+        this.memberProducts = memberProducts;
     }
 
     public LockerPrac getLocker() {

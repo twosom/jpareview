@@ -17,7 +17,9 @@ public class ProductPrac {
     @ManyToMany(mappedBy = "products")
     private List<MemberPrac> members = new ArrayList<>();
 
+
     public List<MemberPrac> getMembers() {
+
         return members;
     }
 
