@@ -21,11 +21,16 @@ public class JPAMAIN {
         try {
             tx.begin();
 
-            ParentId parentId = new ParentId("myId1", "myId2");
-            Parent parent = em.find(Parent.class, parentId);
-            System.out.println("parent = " + parent);
+            ParentId id1 = new ParentId();
+            id1.setId1("myId1");
+            id1.setId2("myId2");
+
+            ParentId id2 = new ParentId();
+            id2.setId1("myId1");
+            id2.setId2("myId2");
 
 
+            System.out.println("id1 == it2 : " + id1.equals(id2));
 
             tx.commit();
         } catch (Exception e) {
