@@ -1,16 +1,15 @@
 package com.jpareview;
 
-import com.jpareview.domain.Member;
-import com.jpareview.practice.MemberPrac;
-import com.jpareview.practice.MemberProduct;
-import com.jpareview.practice.MemberProductId;
-import com.jpareview.practice.ProductPrac;
+
+import com.jpareview.domain.Category;
+import com.jpareview.domain.CategoryItem;
+import com.jpareview.domain.Item;
+import com.jpareview.practice.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 
 public class JPAMAIN {
@@ -22,19 +21,11 @@ public class JPAMAIN {
         try {
             tx.begin();
 
-            //기본키 값 생성
-            MemberProductId memberProductId = new MemberProductId();
-            memberProductId.setMember("member1");
-            memberProductId.setProduct("productA");
+            ParentId parentId = new ParentId("myId1", "myId2");
+            Parent parent = em.find(Parent.class, parentId);
+            System.out.println("parent = " + parent);
 
-            MemberProduct memberProduct = em.find(MemberProduct.class, memberProductId);
 
-            MemberPrac member = memberProduct.getMember();
-            ProductPrac product = memberProduct.getProduct();
-
-            System.out.println("member.getUsername() = " + member.getUsername());
-            System.out.println("product.getName() = " + product.getName());
-            System.out.println("memberProduct.getOrderAmount() = " + memberProduct.getOrderAmount());
 
             tx.commit();
         } catch (Exception e) {

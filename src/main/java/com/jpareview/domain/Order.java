@@ -4,10 +4,16 @@ package com.jpareview.domain;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "ORDERS",
+        uniqueConstraints = @UniqueConstraint(
+                name = "DELIVERY_ID_UNIQ",
+                columnNames = {"DELIVERY_ID"}
+        )
+)
 public class Order {
     @Id
     @GeneratedValue
@@ -28,13 +34,11 @@ public class Order {
 
     //연관관계 메소드
     public void setMember(Member member) {
-        //이미 연관관계 설정이 되어있다면
+        //이미 연관관계가 있다면 기존 연관관계 제거
         if (this.member != null) {
             this.member.getOrders().remove(this);
         }
-
         this.member = member;
-        //상대 객체(Member클래스)에도 추가해서 객체지향적 메소드 구현
         member.getOrders().add(this);
     }
 
@@ -42,6 +46,11 @@ public class Order {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
+
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+    private Date orderDate;
 
 
     public Long getId() {
@@ -79,5 +88,22 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOreder(this);
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
     }
 }

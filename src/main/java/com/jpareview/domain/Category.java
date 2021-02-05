@@ -5,20 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+public class Category {
 
     @Id
     @GeneratedValue
-    @Column(name = "ITEM_ID")
+    @Column(name = "CATEGORY_ID")
     private Long id;
 
     private String name;
-    private int price;
-    private int stockQuantity;
 
-
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "category")
     private List<CategoryItem> categoryItemList = new ArrayList<>();
+
+//    @OneToOne
+//    @JoinTable(
+//            name = "CATEGORY_ITEM",
+//            joinColumns = @JoinColumn(name = "CATEGORY_ID"),
+//            inverseJoinColumns = @JoinColumn(name = "ITEM_ID")
+//    )
+//    private List<Category> categories = new ArrayList<>();
+
+
 
     public Long getId() {
         return id;
@@ -34,22 +41,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
     }
 
     public List<CategoryItem> getCategoryItemList() {

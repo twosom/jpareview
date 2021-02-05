@@ -1,23 +1,36 @@
 package com.jpareview.practice;
 
+
 import javax.persistence.*;
 
 @Entity
-@IdClass(MemberProductId.class)
-public class MemberProduct {
+@Table(name = "ORDER_PRAC")
+public class OrderPrac {
 
     @Id
+    @GeneratedValue
+    @Column(name = "ORDER_ID")
+    private Long id;
+
     @ManyToOne
     @JoinColumn(name = "MEMBER_PRAC_ID")
     private MemberPrac member;
 
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "PRODUCT_PRAC_ID")
     private ProductPrac product;
 
     private int orderAmount;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public MemberPrac getMember() {
         return member;

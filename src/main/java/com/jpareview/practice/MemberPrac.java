@@ -16,10 +16,9 @@ public class MemberPrac {
     @OneToOne(mappedBy = "member")
     private LockerPrac locker;
 
-
-    //역방향
     @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts;
+    private List<OrderPrac> orders = new ArrayList<>();
+
 
 
     public String getId() {
@@ -38,13 +37,6 @@ public class MemberPrac {
         this.username = username;
     }
 
-    public List<MemberProduct> getMemberProducts() {
-        return memberProducts;
-    }
-
-    public void setMemberProducts(List<MemberProduct> memberProducts) {
-        this.memberProducts = memberProducts;
-    }
 
     public LockerPrac getLocker() {
         return locker;
@@ -54,5 +46,11 @@ public class MemberPrac {
         this.locker = locker;
     }
 
+    public List<OrderPrac> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(List<OrderPrac> orders) {
+        this.orders = orders;
+    }
 }

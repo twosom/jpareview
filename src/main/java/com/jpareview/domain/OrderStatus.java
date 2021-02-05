@@ -1,5 +1,6 @@
 package com.jpareview.domain;
 
 public enum OrderStatus {
-    ORDER, CANCEL
+    READY,  //준비
+    COMP    //배송
 }
