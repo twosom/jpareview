@@ -1,11 +1,17 @@
 package com.jpareview.practice;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class GrandChildId implements Serializable {
 
-    private ChildId child;
+    private ChildId childId;
+
+    @Column(name = "GRANDCHILD_ID")
     private String id;
+
 
     @Override
     public boolean equals(Object o) {
@@ -14,15 +20,14 @@ public class GrandChildId implements Serializable {
 
         GrandChildId that = (GrandChildId) o;
 
-        if (child != null ? !child.equals(that.child) : that.child != null) return false;
+        if (childId != null ? !childId.equals(that.childId) : that.childId != null) return false;
         return id != null ? id.equals(that.id) : that.id == null;
     }
 
     @Override
     public int hashCode() {
-        int result = child != null ? child.hashCode() : 0;
+        int result = childId != null ? childId.hashCode() : 0;
         result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }
-

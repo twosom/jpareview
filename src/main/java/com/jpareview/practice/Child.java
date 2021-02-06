@@ -2,20 +2,29 @@ package com.jpareview.practice;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@IdClass(ChildId.class)
-public class Child {
+public class Child implements Serializable {
 
-    @Id
+    @EmbeddedId
+    private ChildId id;
+
+
+    @MapsId("parentId")
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
-    private Parent parent;
+    public Parent parent;
 
+    private String name;
 
-    @Id
-    @Column(name = "CHILD_ID")
-    private String childId;
+    public ChildId getId() {
+        return id;
+    }
+
+    public void setId(ChildId id) {
+        this.id = id;
+    }
 
     public Parent getParent() {
         return parent;
@@ -25,11 +34,11 @@ public class Child {
         this.parent = parent;
     }
 
-    public String getChildId() {
-        return childId;
+    public String getName() {
+        return name;
     }
 
-    public void setChildId(String childId) {
-        this.childId = childId;
+    public void setName(String name) {
+        this.name = name;
     }
 }

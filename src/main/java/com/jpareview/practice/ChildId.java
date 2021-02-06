@@ -1,33 +1,33 @@
 package com.jpareview.practice;
 
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class ChildId implements Serializable {
 
+    private String parentId;
 
-    private String parent;
-    private String childId;
-
-    public ChildId() {
-    }
-
+    @Column(name = "CHILD_ID")
+    private String id;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ChildId childId1 = (ChildId) o;
+        ChildId childId = (ChildId) o;
 
-        if (parent != null ? !parent.equals(childId1.parent) : childId1.parent != null) return false;
-        return childId != null ? childId.equals(childId1.childId) : childId1.childId == null;
+        if (parentId != null ? !parentId.equals(childId.parentId) : childId.parentId != null) return false;
+        return id != null ? id.equals(childId.id) : childId.id == null;
     }
 
     @Override
     public int hashCode() {
-        int result = parent != null ? parent.hashCode() : 0;
-        result = 31 * result + (childId != null ? childId.hashCode() : 0);
+        int result = parentId != null ? parentId.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 }
