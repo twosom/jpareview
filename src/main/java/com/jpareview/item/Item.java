@@ -1,11 +1,16 @@
-package com.jpareview.domain;
+package com.jpareview.item;
+
+import com.jpareview.domain.BaseEntity;
+import com.jpareview.domain.CategoryItem;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE")
+public abstract class Item extends BaseEntity {
 
     @Id
     @GeneratedValue

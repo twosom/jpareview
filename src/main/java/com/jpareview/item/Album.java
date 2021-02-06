@@ -1,15 +1,15 @@
-package com.jpareview.practice;
+package com.jpareview.item;
+
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @DiscriminatorValue("A")
-public class Album extends ItemPrac {
+public class Album extends Item {
 
     private String artist;
+    private String etc;
 
     public String getArtist() {
         return artist;
@@ -17,5 +17,13 @@ public class Album extends ItemPrac {
 
     public void setArtist(String artist) {
         this.artist = artist;
+    }
+
+    public String getEtc() {
+        return etc;
+    }
+
+    public void setEtc(String etc) {
+        this.etc = etc;
     }
 }

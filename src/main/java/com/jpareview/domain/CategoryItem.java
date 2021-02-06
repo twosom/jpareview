@@ -1,10 +1,12 @@
 package com.jpareview.domain;
 
+import com.jpareview.item.Item;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "CATEGORY_ITEM")
-public class CategoryItem {
+public class CategoryItem extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
