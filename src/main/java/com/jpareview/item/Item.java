@@ -22,7 +22,7 @@ public abstract class Item extends BaseEntity {
     private int stockQuantity;
 
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<CategoryItem> categoryItemList = new ArrayList<>();
 
     public Long getId() {

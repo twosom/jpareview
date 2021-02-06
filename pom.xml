@@ -29,11 +29,22 @@
             <version>2.3.0</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-core</artifactId>-->
+<!--            <version>5.4.27.Final</version>-->
+<!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.4.27.Final</version>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>6.0.0.Alpha6</version>
+            <type>pom</type>
         </dependency>
+
+
+
 
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>

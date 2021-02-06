@@ -1,15 +1,13 @@
 package com.jpareview;
 
 
-
-import com.jpareview.domain.Member;
+import com.jpareview.domain.*;
+import com.jpareview.item.Book;
+import com.jpareview.item.Item;
 import com.jpareview.item.Movie;
 import review.MemberPrac;
 import review.TeamPrac;
-import review.example.MemberEx;
-import review.example.OrderEx;
-import review.example.ProductEx;
-import review.example.TeamEx;
+import review.example.*;
 
 
 import javax.persistence.EntityManager;
@@ -29,50 +27,53 @@ public class JPAMAIN {
         try {
             tx.begin();
 
-//            TeamEx team = new TeamEx();
-//            team.setId("team1");
-//            team.setName("teamA");
-//            em.persist(team);
-//
-//
-//            MemberEx member = new MemberEx();
-//            member.setAge(27);
-//            member.setId("member1");
-//            member.setUsername("SM");
-//            member.setTeamEx(team);
-//            em.persist(member);
-//
-//
-//            OrderEx order = new OrderEx();
-//            order.setId("order1");
-//            em.persist(order);
-//            member.addOrder(order);
-//
-//
-//            ProductEx product = new ProductEx();
-//            product.setId("product1");
-//            product.setName("상품1");
-//            em.persist(product);
-//
-//            order.setProductEx(product);
+            //주문생성
+            Delivery delivery = new Delivery();
+            delivery.setStatus(DeliveryStatus.ORDER);
+            delivery.setCity("INCHEON");
+            delivery.setStreet("GILJUNAM-RO");
+            delivery.setZipcode("20213");
+            delivery.setCreatedDate(LocalDateTime.now());
+            delivery.setLastModifiedDate(LocalDateTime.now());
 
 
-            MemberEx member = em.find(MemberEx.class, "member1");
-            TeamEx team = member.getTeamEx();
-            System.out.println("team.getName() = " + team.getName());
+
+            //주문아이템 생성
+            OrderItem orderItem1 = new OrderItem();
+            Movie movie = new Movie();
+            movie.setName("TENET");
+            movie.setCreatedDate(LocalDateTime.of(2020, 8, 12, 0, 0));
+            movie.setActor("John David Washington");
+            movie.setPrice(15_000);
+            movie.setDirector("Christopher Nolan");
+            movie.setStockQuantity(1_992_467);
+            em.persist(movie);
+            orderItem1.setItem(movie);
 
 
-            System.out.println("===========================");
-            List<OrderEx> orders = member.getOrderExList();
-            System.out.println("orders.getClass().getSimpleName( = " + orders.getClass());
-            System.out.println("===========================");
+            //주문아이템 생성
+            OrderItem orderItem2 = new OrderItem();
+            Book book = new Book();
+            book.setCreatedDate(LocalDateTime.of(2015, 07, 28, 0, 0));
+            book.setName("자바 ORM 표준 JPA 프로그래밍 ");
+            book.setIsbn("9788960777330");
+            book.setAuthor("김영한");
+            book.setPrice(43_000);
+            book.setStockQuantity(5_000_000);
+            em.persist(book);
+            orderItem2.setItem(book);
 
 
-            System.out.println("===========================");
-            for (OrderEx order : orders) {
-                System.out.println(order.getProductEx().getName());
-            }
-            System.out.println("===========================");
+
+
+            Order order = new Order();
+            order.setDelivery(delivery);
+            order.addOrderItem(orderItem1);
+            order.addOrderItem(orderItem2);
+
+
+
+            em.persist(order);
 
             tx.commit();
         } catch (Exception e) {

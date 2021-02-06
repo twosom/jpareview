@@ -19,7 +19,7 @@
             <property name="hibernate.jdbc.batchsize" value="10" />
 <!--            <property name="spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults" value="false" />-->
             <!--            <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />-->
-            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
         </properties>
     </persistence-unit>
