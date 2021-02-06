@@ -2,9 +2,7 @@ package com.jpareview.practice;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 public class ParentId implements Serializable {
@@ -22,16 +20,8 @@ public class ParentId implements Serializable {
 
         ParentId parentId = (ParentId) o;
 
-        if (!Objects.equals(id1, parentId.id1)) return false;
-        return Objects.equals(id2, parentId.id2);
-    }
-
-    public ParentId() {
-    }
-
-    public ParentId(String id1, String id2) {
-        this.id1 = id1;
-        this.id2 = id2;
+        if (id1 != null ? !id1.equals(parentId.id1) : parentId.id1 != null) return false;
+        return id2 != null ? id2.equals(parentId.id2) : parentId.id2 == null;
     }
 
     @Override
@@ -41,12 +31,11 @@ public class ParentId implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "ParentId{" +
-                "id1='" + id1 + '\'' +
-                ", id2='" + id2 + '\'' +
-                '}';
+    public ParentId() {}
+
+    public ParentId(String id1, String id2) {
+        this.id1 = id1;
+        this.id2 = id2;
     }
 
     public String getId1() {
@@ -63,5 +52,13 @@ public class ParentId implements Serializable {
 
     public void setId2(String id2) {
         this.id2 = id2;
+    }
+
+    @Override
+    public String toString() {
+        return "ParentId{" +
+                "id1='" + id1 + '\'' +
+                ", id2='" + id2 + '\'' +
+                '}';
     }
 }
