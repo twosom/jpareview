@@ -1,32 +1,20 @@
 package com.jpareview.practice;
 
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Parent {
 
     @Id
-    @Column(name = "PARENT_ID")
-    private String id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @OneToOne
+    @JoinTable(name = "PARENT_CHILD",
+            joinColumns = @JoinColumn(name = "PARENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CHILD_ID"),
+            uniqueConstraints = @UniqueConstraint(name = "CHILD_ID_UNIQ", columnNames = {"CHILD_ID"})
+    )
+    private Child child;
 }

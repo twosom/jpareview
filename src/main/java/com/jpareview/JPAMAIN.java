@@ -21,6 +21,7 @@ public class JPAMAIN {
         try {
             tx.begin();
 
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();
