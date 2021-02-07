@@ -1,12 +1,7 @@
 package com.jpareview.jpareview;
 
 
-import org.assertj.core.api.Assertions;
 import org.hibernate.Hibernate;
-import org.hibernate.jpa.internal.PersistenceUnitUtilImpl;
-import org.hibernate.proxy.HibernateProxy;
-import review.MemberPrac;
-import review.TeamPrac;
 
 import javax.persistence.*;
 
@@ -23,11 +18,7 @@ public class Test {
 
         tx.begin();
         try {
-            MemberPrac member = em.getReference(MemberPrac.class, 3L);
 
-            System.out.println("member.getClass().getSimpleName() = " + member.getClass().getSimpleName());
-
-            Hibernate.initialize(member);
 
             tx.commit();
         } catch (Exception e) {

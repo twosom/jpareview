@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Member extends BaseEntity{
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -15,12 +15,26 @@ public class Member extends BaseEntity{
 
     private String name;
 
-    private String city;
-    private String street;
-    private String zipcode;
+    @Embedded
+    private Address address;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+
+
+    public void addOrder(Order order) {
+        if (orders.contains(order)) {
+            orders.remove(order);
+            System.out.println("멤버 쪽 주문 중복 제거 완료");
+        }
+        if (order.getMember() == this) {
+            order.setMember(null);
+            System.out.println("주문 쪽 맴버 중복 제거 완료");
+        }
+        order.setMember(this);
+        orders.add(order);
+        System.out.println("추가 완료");
+    }
 
     public Long getId() {
         return id;
@@ -38,28 +52,12 @@ public class Member extends BaseEntity{
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public List<Order> getOrders() {

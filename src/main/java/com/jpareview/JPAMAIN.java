@@ -3,19 +3,17 @@ package com.jpareview;
 
 import com.jpareview.domain.*;
 import com.jpareview.item.Book;
-import com.jpareview.item.Item;
 import com.jpareview.item.Movie;
-import review.MemberPrac;
-import review.TeamPrac;
-import review.example.*;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 
 public class JPAMAIN {
@@ -30,13 +28,9 @@ public class JPAMAIN {
             //주문생성
             Delivery delivery = new Delivery();
             delivery.setStatus(DeliveryStatus.ORDER);
-            delivery.setCity("INCHEON");
-            delivery.setStreet("GILJUNAM-RO");
-            delivery.setZipcode("20213");
+            delivery.setAddress(new Address("인천광역시 부평구", "길주남로143", "21013"));
             delivery.setCreatedDate(LocalDateTime.now());
             delivery.setLastModifiedDate(LocalDateTime.now());
-
-
 
             //주문아이템 생성
             OrderItem orderItem1 = new OrderItem();
@@ -47,8 +41,12 @@ public class JPAMAIN {
             movie.setPrice(15_000);
             movie.setDirector("Christopher Nolan");
             movie.setStockQuantity(1_992_467);
+
             em.persist(movie);
+
             orderItem1.setItem(movie);
+
+
 
 
             //주문아이템 생성
@@ -63,17 +61,22 @@ public class JPAMAIN {
             em.persist(book);
             orderItem2.setItem(book);
 
-
-
-
             Order order = new Order();
             order.setDelivery(delivery);
             order.addOrderItem(orderItem1);
             order.addOrderItem(orderItem2);
-
-
-
             em.persist(order);
+
+            Member member = new Member();
+            member.setName("SM");
+            member.setAddress(delivery.getAddress());
+            member.setCreatedDate(LocalDateTime.now());
+            member.addOrder(order);
+            em.persist(member);
+            System.out.println("============================================");
+
+
+
 
             tx.commit();
         } catch (Exception e) {
